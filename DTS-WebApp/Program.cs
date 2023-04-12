@@ -13,6 +13,7 @@ builder.Services.AddDbContext<MyContext>(options => options.UseSqlServer(connect
 
 // Configure Services for Dependency Injection
 builder.Services.AddScoped<IUniversityRepository, UniversityRepository>();
+builder.Services.AddScoped<IEducationRepository, EducationRepository>();
 //builder.Services.AddTransient()
 //builder.Services.AddSingleton()
 

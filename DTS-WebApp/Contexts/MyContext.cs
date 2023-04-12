@@ -30,7 +30,7 @@ public class MyContext : DbContext
                     .WithOne(e => e.University)
                     .HasForeignKey(u => u.UniversityId)
                     .OnDelete(DeleteBehavior.NoAction);
-        
+
         // one profiling has one education
         modelBuilder.Entity<Profiling>()
                     .HasOne(p => p.Education)
