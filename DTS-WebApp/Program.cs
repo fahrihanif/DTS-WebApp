@@ -1,6 +1,7 @@
 using DTS_WebApp.Contexts;
 using DTS_WebApp.Repository;
 using DTS_WebApp.Repository.Contracts;
+using DTS_WebApp.Repository.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,7 @@ builder.Services.AddDbContext<MyContext>(options => options.UseSqlServer(connect
 // Configure Services for Dependency Injection
 builder.Services.AddScoped<IUniversityRepository, UniversityRepository>();
 builder.Services.AddScoped<IEducationRepository, EducationRepository>();
+builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 //builder.Services.AddTransient()
 //builder.Services.AddSingleton()
 

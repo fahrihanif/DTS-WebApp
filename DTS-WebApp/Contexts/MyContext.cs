@@ -65,5 +65,8 @@ public class MyContext : DbContext
                     .WithOne(ar => ar.Role)
                     .HasForeignKey(r => r.RoleId)
                     .OnDelete(DeleteBehavior.NoAction);
+
+        /*modelBuilder.Entity<RegisterVM>()
+                    .HasNoKey();*/
     }
 }
