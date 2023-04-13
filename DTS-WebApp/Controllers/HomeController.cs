@@ -14,6 +14,8 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        var getFullNameSesion = HttpContext.Session.GetString("FullName");
+        ViewBag.FullName = getFullNameSesion;
         return View();
     }
 

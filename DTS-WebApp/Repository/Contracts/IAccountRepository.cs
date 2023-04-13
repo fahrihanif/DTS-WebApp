@@ -6,4 +6,5 @@ namespace DTS_WebApp.Repository.Contracts;
 public interface IAccountRepository : IGeneralRepository<Account, string>
 {
     int Register(RegisterVM registerVM);
+    bool Login(LoginVM loginVM);
 }

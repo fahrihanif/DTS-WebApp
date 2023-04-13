@@ -68,5 +68,7 @@ public class MyContext : DbContext
 
         /*modelBuilder.Entity<RegisterVM>()
                     .HasNoKey();*/
+        /*modelBuilder.Entity<LoginVM>()
+                    .HasNoKey();*/
     }
 }

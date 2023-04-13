@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<MyContext>(options => options.UseSqlServer(connectionString));
 
@@ -16,8 +17,14 @@ builder.Services.AddDbContext<MyContext>(options => options.UseSqlServer(connect
 builder.Services.AddScoped<IUniversityRepository, UniversityRepository>();
 builder.Services.AddScoped<IEducationRepository, EducationRepository>();
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
-//builder.Services.AddTransient()
-//builder.Services.AddSingleton()
+builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+
+
+// Configure Session
+builder.Services.AddSession(options => {
+    options.IdleTimeout = TimeSpan.FromSeconds(10);
+});
+
 
 var app = builder.Build();
 
@@ -30,6 +37,8 @@ if (!app.Environment.IsDevelopment()) {
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseSession();
 
 app.UseRouting();
 

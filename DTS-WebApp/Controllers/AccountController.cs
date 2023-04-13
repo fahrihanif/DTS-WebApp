@@ -7,9 +7,11 @@ namespace DTS_WebApp.Controllers;
 public class AccountController : Controller
 {
     private readonly IAccountRepository _accountRepository;
-    public AccountController(IAccountRepository accountRepository)
+    private readonly IEmployeeRepository _employeeRepository;
+    public AccountController(IAccountRepository accountRepository, IEmployeeRepository employeeRepository)
     {
         _accountRepository = accountRepository;
+        _employeeRepository = employeeRepository;
     }
 
     // GET - Register
@@ -46,5 +48,22 @@ public class AccountController : Controller
     public IActionResult Login()
     {
         return View();
+    }
+
+    // POST - Login
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Login(LoginVM loginVM)
+    {
+        var result = _accountRepository.Login(loginVM);
+        if (!result) {
+            ModelState.AddModelError(string.Empty, "Email or Password is Incorrect!");
+            return View();
+        }
+
+        var getFullName = _employeeRepository.GetFullName(loginVM.Email);
+        HttpContext.Session.SetString("FullName", getFullName);
+
+        return RedirectToAction("Index", "Home");
     }
 }
